@@ -5,7 +5,7 @@ import arenas
 # general -- first three parameters can be overwritten with command-line arguments (cf. "python tetracomposibot.py --help")
 
 display_mode = 0
-arena = 1
+arena = 0
 position = False 
 max_iterations = 2001 #401*500
 
@@ -13,15 +13,21 @@ max_iterations = 2001 #401*500
 
 display_welcome_message = False
 verbose_minimal_progress = False # display iterations
-display_robot_stats = False
-display_team_stats = False
-display_tournament_results = True
+display_robot_stats = True
+display_team_stats = True
+display_tournament_results = False 
 display_time_stats = False
 
 # initialization : create and place robots at initial positions (returns a list containing the robots)
 
 import robot_challenger
 import robot_champion
+import robot_avoider
+import robot_wanderer
+import robot_dumb
+import robot_optimize
+import robot_sub
+import robot_gen
 
 def initialize_robots(arena_size=-1, particle_box=-1): # particle_box: size of the robot enclosed in a square
     global position
@@ -38,7 +44,10 @@ def initialize_robots(arena_size=-1, particle_box=-1): # particle_box: size of t
         orientation_challenger = 0
     robots = []
     for i in range(4):
-        robots.append(robot_challenger.Robot_player(x_init_pos[0], arena_size//2-16+i*8, orientation_champion, name="", team="A"))
+        robots.append(robot_gen.Robot_player(x_init_pos[0], arena_size//2-16+i*8, orientation_champion, name="", team="A"))
+        #robots.append(robot_dumb.Robot_player(x_init_pos[0], arena_size//2-16+i*8, orientation_challenger, name="", team="A"))
     for i in range(4):
-        robots.append(robot_champion.Robot_player(x_init_pos[1], arena_size//2-16+i*8, orientation_challenger, name="", team="B"))
+        #robots.append(robot_champion.Robot_player(x_init_pos[1], arena_size//2-16+i*8, orientation_challenger, name="", team="B"))
+        robots.append(robot_avoider.Robot_player(x_init_pos[1], arena_size//2-16+i*8, orientation_challenger, name="Yen", team="B"))
+        #robots.append(robot_dumb.Robot_player(x_init_pos[1], arena_size//2-16+i*8, orientation_challenger, name="", team="B"))
     return robots

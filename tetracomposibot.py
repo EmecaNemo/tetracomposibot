@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 # Tetracomposibot
 # A simple python simulator for playing with one... to many robots
 # "With the Tetracomposibot it has now become possible to play and compose REAL simple robot demo"
